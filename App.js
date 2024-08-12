@@ -135,287 +135,305 @@ export default () => {
     <SafeAreaProvider>
       <SafeAreaView>
         <TamaguiProvider config={tamaguiConfig}>
-          {/* Instagram text */}
-          <XStack
-            justifyContent="space-between"
-            alignItems="center"
-            paddingHorizontal={15}
-            paddingVertical={5}
-          >
-            <XStack alignItems="center">
-              {/* <Text textAlign="center" fontSize={32} padding={4} fontFamily="styleScript" color={"black"}>Instagram</Text> */}
-              <Image
-                source={{
-                  uri: "https://www.dafont.com/forum/attach/orig/7/3/737566.png?",
-                  width: 120,
-                  height: 35,
-                }}
-              />
-              <MaterialCommunityIcons name="chevron-down" size={30} />
+          <View>
+            {/* Instagram text */}
+            <XStack
+              justifyContent="space-between"
+              alignItems="center"
+              paddingHorizontal={15}
+              paddingVertical={5}
+            >
+              <XStack alignItems="center">
+                {/* <Text textAlign="center" fontSize={32} padding={4} fontFamily="styleScript" color={"black"}>Instagram</Text> */}
+                <Image
+                  source={{
+                    uri: "https://www.dafont.com/forum/attach/orig/7/3/737566.png?",
+                    width: 120,
+                    height: 35,
+                  }}
+                />
+                <MaterialCommunityIcons name="chevron-down" size={30} />
+              </XStack>
+              <XStack gap={15}>
+                <MaterialCommunityIcons name="heart-outline" size={30} />
+                <MaterialCommunityIcons name="facebook-messenger" size={30} />
+              </XStack>
             </XStack>
-            <XStack gap={15}>
-              <MaterialCommunityIcons name="heart-outline" size={30} />
-              <MaterialCommunityIcons name="facebook-messenger" size={30} />
-            </XStack>
-          </XStack>
 
-          {/* Story */}
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <XStack paddingVertical={10} paddingHorizontal={15}>
-              <XStack gap={15} alignItems="center">
-                <YStack alignItems="center">
+            {/* Story */}
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              <XStack paddingVertical={10} paddingHorizontal={15}>
+                <XStack gap={15} alignItems="center">
+                  <YStack alignItems="center">
+                    <Image
+                      source={{
+                        uri: "https://randomuser.me/api/portraits/women/52.jpg",
+                        width: 75,
+                        height: 75,
+                      }}
+                      borderRadius={50}
+                    />
+                    <XStack position="absolute" bottom={0} right={0}>
+                      <ZStack position="absolute">
+                        <MaterialCommunityIcons
+                          name="circle"
+                          size={30}
+                          color="white"
+                          style={{ position: "absolute", bottom: 15, right: 0 }}
+                        />
+                        <MaterialCommunityIcons
+                          name="plus-circle"
+                          size={30}
+                          color="#0393f3"
+                          style={{ position: "absolute", bottom: 15, right: 0 }}
+                        />
+                      </ZStack>
+                    </XStack>
+                    <Text>Your Story</Text>
+                  </YStack>
+                  <XStack gap={10}>
+                    {stories.map(({ id, uri, name }) => (
+                      <YStack alignItems="center" key={id}>
+                        <LinearGradient
+                          colors={[
+                            "#cc2366",
+                            "#bc1888",
+                            "#bc1888",
+                            "#fcc353",
+                            "#f09433",
+                            "#e6683c",
+                            "#dc2743",
+                          ]}
+                          start={[0, 0]}
+                          end={[1, 1]}
+                          borderRadius={50}
+                          padding={2}
+                        >
+                          <Image
+                            source={{
+                              uri,
+                              width: 75,
+                              height: 75,
+                            }}
+                            borderRadius={50}
+                          />
+                        </LinearGradient>
+                        <Text>{name}</Text>
+                      </YStack>
+                    ))}
+                  </XStack>
+                </XStack>
+              </XStack>
+            </ScrollView>
+
+            {/* FEEDS */}
+            <ScrollView vertical showsVerticalScrollIndicator={false}>
+              <YStack>
+                <YStack paddingVertical={2} paddingHorizontal={15}>
+                  <XStack
+                    alignItems="center"
+                    justifyContent="space-between"
+                    gap={5}
+                  >
+                    <MaterialCommunityIcons
+                      name="check-circle-outline"
+                      size={30}
+                      color={"#bc1888"}
+                    />
+                    <Text color={"grey"} fontSize={18}>
+                      You've seen all new posts from the past 3 days from
+                      accounts you follow.
+                    </Text>
+                  </XStack>
+                  <XStack
+                    paddingHorizontal={5}
+                    paddingVertical={5}
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <Text color={"black"} fontSize={25}>
+                      Suggested for you
+                    </Text>
+                    <Text color={"#0393f3"} fontSize={20}>
+                      Older posts
+                    </Text>
+                  </XStack>
+                </YStack>
+                {/* FOTO NO PADDING */}
+                {FEEDS_DATA.map((post) => {
+                  return (
+                    <YStack key={post.id} style={{ flex: 1 }}>
+                      <XStack
+                        backgroundColor={"white"}
+                        justifyContent="space-between"
+                      >
+                        <XStack alignItems="center" padding={5}>
+                          <Image
+                            borderRadius={25}
+                            source={{
+                              uri: post.imageUrl,
+                              width: 50,
+                              height: 50,
+                            }}
+                          />
+                          <Text paddingLeft={5} color={"black"}>
+                            {post.username}
+                          </Text>
+                        </XStack>
+                        <XStack alignItems="center">
+                          <Button backgroundColor={"#f4f5f7"}>
+                            <Label>Follow</Label>
+                          </Button>
+                          <MaterialCommunityIcons
+                            name="dots-vertical"
+                            size={20}
+                          />
+                        </XStack>
+                      </XStack>
+                      <Image
+                        source={{
+                          uri: post.feed.imageUrl,
+                          height: 500,
+                        }}
+                      />
+                      <XStack
+                        backgroundColor={"white"}
+                        padding={5}
+                        justifyContent="space-between"
+                      >
+                        <XStack gap={5}>
+                          <MaterialCommunityIcons
+                            name="heart-outline"
+                            size={24}
+                          />
+                          <MaterialCommunityIcons
+                            name="chat-outline"
+                            size={24}
+                          />
+                          <Ionicons
+                            name="paper-plane-outline"
+                            size={24}
+                            color="black"
+                          />
+                        </XStack>
+                        <XStack>
+                          <Ionicons
+                            name="bookmark-outline"
+                            size={24}
+                            color="black"
+                          />
+                        </XStack>
+                      </XStack>
+                      <XStack backgroundColor={"white"} paddingLeft={5}>
+                        <XStack position="relative" paddingVertical={15}>
+                          {post.feed.friendLikes
+                            .slice(0, 3)
+                            .map(({ imageUrl, name }, index) => (
+                              <Image
+                                key={name}
+                                source={{
+                                  uri: imageUrl,
+                                  width: 24,
+                                  height: 24,
+                                }}
+                                borderRadius={50}
+                                position="absolute"
+                                left={(index * 25) / 2}
+                              />
+                            ))}
+                        </XStack>
+                        <Text marginLeft={2 * 25 + 10}>
+                          Liked by{" "}
+                          <Text fontWeight={700}>
+                            {post.feed.friendLikes[0].name}
+                          </Text>{" "}
+                          and 9 others
+                        </Text>
+                      </XStack>
+                      <YStack backgroundColor={"white"} paddingLeft={5}>
+                        <Text gap={20}>
+                          <Text
+                            style={{
+                              fontWeight: "bold",
+                              marginRight: 5,
+                              color: "black",
+                            }}
+                          >
+                            {post.username}
+                            {"  "}
+                          </Text>
+                          <Text numberOfLines={2} style={{ color: "black" }}>
+                            {post.feed.caption}
+                          </Text>
+                        </Text>
+                        <Text color={"black"}>
+                          View all {post.feed.totalComments}
+                        </Text>
+                        <Text color={"black"}>
+                          {formatDate(post.feed.postDate)}
+                        </Text>
+                      </YStack>
+                    </YStack>
+                  );
+                })}
+              </YStack>
+            </ScrollView>
+            {/* Tab home, search, plus, video, ava-me */}
+            <View
+              style={{
+                position: "absolute",
+                zIndex: 999,
+                bottom: 0,
+              }}
+            >
+              <XStack
+                style={{
+                  backgroundColor: "#FFFFFF",
+                  borderTopWidth: 1,
+                  borderColor: "#a3a3a3cb",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-around",
+                  padding: 10,
+                  zIndex: 9999,
+                  position: "absolute",
+                  bottom: 0,
+                  width: "100%",
+                  height: 100,
+                }}
+              >
+                <Foundation name="home" size={30} color="black" />
+                <Ionicons name="search" size={30} color="black" />
+                <Octicons name="diff-added" size={30} color="black" />
+                <MaterialIcons name="ondemand-video" size={30} color="black" />
+                <XStack
+                  style={{
+                    width: 30,
+                    height: 30,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderWidth: 1,
+                    borderColor: "gray",
+                    borderRadius: 200,
+                  }}
+                >
                   <Image
                     source={{
                       uri: "https://randomuser.me/api/portraits/women/52.jpg",
-                      width: 75,
-                      height: 75,
                     }}
-                    borderRadius={50}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      borderRadius: 200,
+                      objectFit: "cover",
+                      borderWidth: 1,
+                      borderColor: "gray",
+                    }}
                   />
-                  <XStack position="absolute" bottom={0} right={0}>
-                    <ZStack position="absolute">
-                      <MaterialCommunityIcons
-                        name="circle"
-                        size={30}
-                        color="white"
-                        style={{ position: "absolute", bottom: 15, right: 0 }}
-                      />
-                      <MaterialCommunityIcons
-                        name="plus-circle"
-                        size={30}
-                        color="#0393f3"
-                        style={{ position: "absolute", bottom: 15, right: 0 }}
-                      />
-                    </ZStack>
-                  </XStack>
-                  <Text>Your Story</Text>
-                </YStack>
-                <XStack gap={10}>
-                  {stories.map(({ id, uri, name }) => (
-                    <YStack alignItems="center" key={id}>
-                      <LinearGradient
-                        colors={[
-                          "#cc2366",
-                          "#bc1888",
-                          "#bc1888",
-                          "#fcc353",
-                          "#f09433",
-                          "#e6683c",
-                          "#dc2743",
-                        ]}
-                        start={[0, 0]}
-                        end={[1, 1]}
-                        borderRadius={50}
-                        padding={2}
-                      >
-                        <Image
-                          source={{
-                            uri,
-                            width: 75,
-                            height: 75,
-                          }}
-                          borderRadius={50}
-                        />
-                      </LinearGradient>
-                      <Text>{name}</Text>
-                    </YStack>
-                  ))}
                 </XStack>
               </XStack>
-            </XStack>
-          </ScrollView>
-
-          {/* FEEDS */}
-          <ScrollView vertical showsVerticalScrollIndicator={false}>
-            <YStack>
-              <YStack paddingVertical={7} paddingHorizontal={15}>
-                <XStack
-                  alignItems="center"
-                  justifyContent="space-between"
-                  gap={5}
-                >
-                  <MaterialCommunityIcons
-                    name="check-circle-outline"
-                    size={30}
-                    color={"#bc1888"}
-                  />
-                  <Text color={"grey"} fontSize={18}>
-                    You've seen all new posts from the past 3 days from accounts
-                    you follow.
-                  </Text>
-                </XStack>
-                <XStack
-                  paddingHorizontal={5}
-                  paddingVertical={5}
-                  alignItems="center"
-                  justifyContent="space-between"
-                >
-                  <Text color={"black"} fontSize={25}>
-                    Suggested for you
-                  </Text>
-                  <Text color={"#0393f3"} fontSize={20}>
-                    Older posts
-                  </Text>
-                </XStack>
-              </YStack>
-              {/* FOTO NO PADDING */}
-              {FEEDS_DATA.map((post) => {
-                return (
-                  <YStack key={post.id} flex={1} paddingBottom={170}>
-                    <XStack
-                      backgroundColor={"white"}
-                      justifyContent="space-between"
-                    >
-                      <XStack alignItems="center" padding={5}>
-                        <Image
-                          borderRadius={25}
-                          source={{
-                            uri: post.imageUrl,
-                            width: 50,
-                            height: 50,
-                          }}
-                        />
-                        <Text paddingLeft={5} color={"black"}>
-                          {post.username}
-                        </Text>
-                      </XStack>
-                      <XStack alignItems="center">
-                        <Button backgroundColor={"#f4f5f7"}>
-                          <Label>Follow</Label>
-                        </Button>
-                        <MaterialCommunityIcons
-                          name="dots-vertical"
-                          size={20}
-                        />
-                      </XStack>
-                    </XStack>
-                    <Image
-                      source={{
-                        uri: post.feed.imageUrl,
-                        height: 500,
-                      }}
-                    />
-                    <XStack
-                      backgroundColor={"white"}
-                      padding={5}
-                      justifyContent="space-between"
-                    >
-                      <XStack gap={5}>
-                        <MaterialCommunityIcons
-                          name="heart-outline"
-                          size={24}
-                        />
-                        <MaterialCommunityIcons name="chat-outline" size={24} />
-                        <Ionicons
-                          name="paper-plane-outline"
-                          size={24}
-                          color="black"
-                        />
-                      </XStack>
-                      <XStack>
-                        <Ionicons
-                          name="bookmark-outline"
-                          size={24}
-                          color="black"
-                        />
-                      </XStack>
-                    </XStack>
-                    <XStack backgroundColor={"white"} paddingLeft={5}>
-                      <XStack position="relative" paddingVertical={15}>
-                        {post.feed.friendLikes
-                          .slice(0, 3)
-                          .map(({ imageUrl, name }, index) => (
-                            <Image
-                              key={name}
-                              source={{
-                                uri: imageUrl,
-                                width: 24,
-                                height: 24,
-                              }}
-                              borderRadius={50}
-                              position="absolute"
-                              left={(index * 25) / 2}
-                            />
-                          ))}
-                      </XStack>
-                      <Text marginLeft={2 * 25 + 10}>
-                        Liked by{" "}
-                        <Text fontWeight={700}>
-                          {post.feed.friendLikes[0].name}
-                        </Text>{" "}
-                        and 9 others
-                      </Text>
-                    </XStack>
-                    <YStack backgroundColor={"white"} paddingLeft={5}>
-                      <Text gap={20}>
-                        <Text
-                          style={{
-                            fontWeight: "bold",
-                            marginRight: 5,
-                            color: "black",
-                          }}
-                        >
-                          {post.username}
-                          {"  "}
-                        </Text>
-                        <Text numberOfLines={2} style={{ color: "black" }}>
-                          {post.feed.caption}
-                        </Text>
-                      </Text>
-                      <Text color={"black"}>
-                        View all {post.feed.totalComments}
-                      </Text>
-                      <Text color={"black"}>
-                        {formatDate(post.feed.postDate)}
-                      </Text>
-                    </YStack>
-                  </YStack>
-                );
-              })}
-            </YStack>
-          </ScrollView>
-          {/* Tab home, search, plus, video, ava-me */}
-          <XStack
-            style={{
-              backgroundColor: "#FFFFFF",
-              borderTopWidth: 1,
-              borderColor: "#a3a3a3cb",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-around",
-              padding: 10,
-            }}
-          >
-            <Foundation name="home" size={30} color="black" />
-            <Ionicons name="search" size={30} color="black" />
-            <Octicons name="diff-added" size={30} color="black" />
-            <MaterialIcons name="ondemand-video" size={30} color="black" />
-            <XStack
-              style={{
-                width: 30,
-                height: 30,
-                alignItems: "center",
-                justifyContent: "center",
-                borderWidth: 1,
-                borderColor: "gray",
-                borderRadius: 200,
-              }}
-            >
-              <Image
-                source={{
-                  uri: "https://randomuser.me/api/portraits/women/52.jpg",
-                }}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  borderRadius: 200,
-                  objectFit: "cover",
-                  borderWidth: 1,
-                  borderColor: "gray",
-                }}
-              />
-            </XStack>
-          </XStack>
+            </View>
+          </View>
         </TamaguiProvider>
       </SafeAreaView>
     </SafeAreaProvider>
